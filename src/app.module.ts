@@ -3,10 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
 
 @Module({
-  imports: [ProductsModule,
+  imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: '127.0.0.1',
+      host: 'localhost',
       port: 5432,
       username: 'postgres',
       password: 'password123',
@@ -16,6 +16,7 @@ import { ProductsModule } from './products/products.module';
       retryDelay: 3000,
       retryAttempts: 10
     }),
+    ProductsModule,
   ],
   controllers: [],
   providers: [],
