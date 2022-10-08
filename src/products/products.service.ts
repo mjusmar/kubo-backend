@@ -19,7 +19,6 @@ export class ProductsService {
 
   async create(data: CreateOrderDto) {
     try{
-      console.log(data);
       let {ord_id} = await this.ordersRepo.save({ord_total: data.ord_total});
 
       Promise.all( data.prodArray.map( async (element: any) => {
