@@ -1,73 +1,88 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# kubo-backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+REST API developed as a **technical assessment** for Kubo Company.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Built with **NestJS**, this service provides the product and cart endpoints consumed by the frontend.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## ✨ Features
 
-## Installation
+- 📦 Product listing & filtering endpoints
+- 🛒 Shopping cart management
+- ✅ Input validation with class-validator
+- 🧪 Unit & e2e test setup
+
+## 🛠️ Tech Stack
+
+| Layer     | Technology                 |
+| --------- | -------------------------- |
+| Framework | NestJS                     |
+| Language  | TypeScript                 |
+| Database  | PostgreSQL                 |
+| Runtime   | Node.js                    |
+| Deploy    | Heroku (Procfile included) |
+
+## 🗄️ Database Schema
+
+![DB Diagram](BD.png)
+
+Three tables with auto-generated prefixed IDs via PostgreSQL triggers:
+
+**`products`** — product catalog
+| Column | Type | Description |
+|--------|------|-------------|
+| `prd_id` | varchar | Primary key (e.g. `PRD_0`) |
+| `prd_name` | varchar | Product name |
+| `prd_price` | varchar | Price |
+| `prd_categ` | varchar | Category |
+| `prd_descr` | varchar | Description |
+| `prd_img` | varchar | Image URL |
+
+**`orders`** — customer orders
+| Column | Type | Description |
+|--------|------|-------------|
+| `ord_id` | varchar | Primary key (e.g. `ORD_0`) |
+| `ord_total` | varchar | Order total |
+
+**`order_product`** — order ↔ product relation (many-to-many)
+| Column | Type | Description |
+|--------|------|-------------|
+| `oxp_id` | varchar | Primary key (e.g. `OXP_0`) |
+| `ord_id` | varchar | FK → orders |
+| `prd_id` | varchar | FK → products |
+
+## 🚀 Getting Started
+
+**Prerequisites:** Node.js 16+, PostgreSQL
 
 ```bash
-$ npm install
+# Clone the repo
+git clone https://github.com/mjusmar/kubo-backend.git
+cd kubo-backend
+
+# Install dependencies
+npm install
+
+# Development
+npm run start:dev
+
+# Production
+npm run start:prod
 ```
 
-## Running the app
+API runs at `http://localhost:3000`
+
+## 🧪 Testing
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
+# Unit tests
+npm run test
 
 # e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run test:e2e
 ```
 
-## Support
+## 🔗 Related
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Frontend → [kubo-front](https://github.com/mjusmar/kubo-front)
